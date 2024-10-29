@@ -34,6 +34,7 @@ const SideNav = () => {
   ];
 
   const path = usePathname();
+  useEffect(() => {}, []);
 
   return (
     <>
