@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- Background -->
+  <rect width="400" height="200" fill="white"/>
+  
+  <!-- Abstract paper/content sheets stacked -->
+  <g transform="translate(40, 65)">
+    <!-- Front sheet -->
+    <rect x="0" y="0" width="60" height="45" fill="black" transform="skewX(-15)"/>
+    
+    <!-- Middle sheet -->
+    <rect x="10" y="-10" width="60" height="45" fill="white" stroke="black" stroke-width="3" transform="skewX(-15)"/>
+    
+    <!-- Back sheet -->
+    <rect x="20" y="-20" width="60" height="45" fill="black" transform="skewX(-15)"/>
+    
+    <!-- Animated line suggesting AI writing -->
+    <path d="M30 5 L65 5" stroke="white" stroke-width="2" transform="skewX(-15)">
+      <animate attributeName="d" 
+               values="M30 5 L65 5;M30 15 L55 15;M30 25 L60 25;M30 5 L65 5" 
+               dur="3s" 
+               repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Text -->
+  <text x="140" y="105" 
+        font-family="Arial, sans-serif" 
+        font-size="42" 
+        font-weight="bold" 
+        text-anchor="start" 
+        fill="black">
+    contentor
+  </text>
+  
+  <!-- Dot in 'o' as binary circle -->
+  <circle cx="338" cy="95" r="5" fill="black">
+    <animate attributeName="r"
+             values="5;3;5"
+             dur="2s"
+             repeatCount="indefinite"/>
+  </circle>
+</svg>
