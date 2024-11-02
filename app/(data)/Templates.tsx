@@ -3,7 +3,7 @@ export default [
     name: "Blog Title",
     desc: "An AI tool that generate blog title depends on yout blog information",
     category: "Blog",
-    icon: "https://cdn-icons-png.flaticon.com/128/4186/4186534.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/2799/2799954.png",
     aiPrompt:
       "Give me 5 blog topic idea in bullet wise only based on give niche & outline and give me result in Rich text editor format",
     slug: "generate-blog-title",
@@ -25,7 +25,7 @@ export default [
     name: "Blog Content",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
     category: "blog",
-    icon: "https://cdn-icons-png.flaticon.com/128/4905/4905454.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/9836/9836554.png",
     slug: "blog-content-generation",
     aiPrompt:
       "Generate Blog Content based on topic and outline in rich text editor format",
@@ -47,7 +47,7 @@ export default [
     name: "Blog Topic Ideas",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
     category: "Blog",
-    icon: "https://cdn-icons-png.flaticon.com/128/11497/11497847.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/16104/16104107.png",
     slug: "blog-topic-idea",
     aiPrompt:
       "Generate top 5 Blog Topic Ideas in bullet point only, (no Description) based on niche in rich text editor format",
@@ -64,7 +64,7 @@ export default [
     name: "Youtube SEO Title",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
     category: "Youtube Tools",
-    icon: "https://cdn-icons-png.flaticon.com/128/402/402075.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/11461/11461589.png",
     slug: "youtube-seo-title",
     aiPrompt:
       "Give me Best SEO optimized high ranked 5 title ideas bullet wise only bases on keywords and outline and give me result in HTML tags format",
@@ -86,7 +86,7 @@ export default [
     name: "Youtube Description",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
     category: "Youtube Tool",
-    icon: "https://cdn-icons-png.flaticon.com/128/2111/2111748.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/1384/1384028.png",
     slug: "youtube-description",
     aiPrompt:
       "Generate Youtube description with emoji under 4-5 lines based on topic and outline in rich text editor format",
@@ -108,7 +108,7 @@ export default [
     name: "Youtube Tags",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
     category: "Youtube Tool",
-    icon: "https://cdn-icons-png.flaticon.com/128/4674/4674918.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/15841/15841074.png",
     slug: "youtube-tag",
 
     aiPrompt:
@@ -132,7 +132,7 @@ export default [
   {
     name: "Rewrite Article (Plagiarism Free)",
     desc: "Use this tool to rewrite existing Article or Blog Post which can bypass AI detectors and also make it plagiarism free.",
-    icon: "https://cdn-icons-png.flaticon.com/128/3131/3131607.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/81/81460.png",
     category: "Rewriting Tool",
     slug: "rewrite-article",
     aiPrompt:
@@ -150,7 +150,7 @@ export default [
   {
     name: "Text Improver",
     desc: "This handy tool refines your writing, eliminating errors and redundancies for a clear, readable result. It also offers a comprehensive tone analysis and suggests better word choices.",
-    icon: "https://cdn-icons-png.flaticon.com/128/1686/1686815.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/17653/17653356.png",
     category: "Writing Assistant",
     slug: "text-improver",
     aiPrompt:
@@ -166,7 +166,7 @@ export default [
   {
     name: "Add Emojis to Text",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    icon: "https://cdn-icons-png.flaticon.com/128/2584/2584606.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/1023/1023656.png",
     category: "blog",
     slug: "add-emoji-to-text",
     aiPrompt:
@@ -183,7 +183,7 @@ export default [
   {
     name: "Instagram Post Generator",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    icon: "https://cdn-icons-png.flaticon.com/128/15713/15713420.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/1384/1384031.png",
     category: "blog",
 
     slug: "instagram-post-generator",
@@ -201,7 +201,7 @@ export default [
   {
     name: "Instagram Hash Tag Generator",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    icon: "https://cdn-icons-png.flaticon.com/128/7045/7045432.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/74/74559.png",
     category: "blog",
 
     slug: "instagram-hash-tag-generator",
@@ -219,7 +219,7 @@ export default [
   {
     name: "Instagram Post/Reel Idea",
     desc: "An AI tool that generate New and trending instagram idea depends on your niche",
-    icon: "https://cdn-icons-png.flaticon.com/128/1029/1029183.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/14/14143.png",
     category: "instagram",
 
     slug: "instagram-post-idea-generator",
@@ -237,7 +237,7 @@ export default [
   {
     name: "English Grammer Check",
     desc: "AI Model to Correct your english grammer by providing the text",
-    icon: "https://cdn-icons-png.flaticon.com/128/12596/12596700.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/12596/12596743.png",
     category: "english",
 
     slug: "english-grammer-checker",
@@ -255,7 +255,7 @@ export default [
   {
     name: "Write Code",
     desc: "AI Model to generate programming code in any language",
-    icon: "https://cdn-icons-png.flaticon.com/128/6062/6062646.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/1336/1336494.png",
     category: "Coding",
 
     slug: "write-code",
@@ -273,7 +273,7 @@ export default [
   {
     name: "Explain Code",
     desc: "AI Model to explain programming code in any language",
-    icon: "https://cdn-icons-png.flaticon.com/128/8488/8488751.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/10478/10478244.png",
     category: "Coding",
 
     slug: "explain-code",
@@ -291,7 +291,7 @@ export default [
   {
     name: "Code Bug Detector",
     desc: "This tool analyzes your input, like error messages and code snippets, to pinpoint and fix bugs, offering detailed solutions and alternatives in a straightforward, user-friendly way.",
-    icon: "https://cdn-icons-png.flaticon.com/128/4426/4426267.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/921/921513.png",
     category: "code-bug-detector",
 
     slug: "code-bug-detector",
@@ -309,7 +309,7 @@ export default [
   {
     name: "Tagline Generator",
     desc: "Struggling to find the perfect tagline for your brand? Let our AI-tool assist you in creating a tagline that stands out.",
-    icon: "https://cdn-icons-png.flaticon.com/128/2178/2178616.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/4213/4213148.png",
     category: "Marketting",
 
     slug: "tagline-generator",
@@ -333,7 +333,7 @@ export default [
   {
     name: "Product Description",
     desc: "This is your AI-powered SEO expert, creating captivating and keyword-rich e-commerce product descriptions to boost your online sales.",
-    icon: "https://cdn-icons-png.flaticon.com/128/679/679922.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/3528/3528145.png",
     category: "Marketting",
 
     slug: "product-description",
