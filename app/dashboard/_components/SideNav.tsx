@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { History, Home, Settings, WalletCards } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -34,34 +34,31 @@ const SideNav = () => {
   ];
 
   const path = usePathname();
-  useEffect(() => {}, []);
 
   return (
-    <>
-      <div className="h-screen p-5 shadow-sm border">
-        <div className="flex items-center border">
-          <Image src={"./logo.svg"} alt="logo" width={200} height={100} />
-        </div>
-
-        <div className="mt-12">
-          {menuItems.map((menu, id) => (
-            <>
-              <div
-                className={`
-                  flex items-center gap-2 mb-2 p-3 
-                  hover:bg-primary hover:text-white 
-                  rounded-lg cursor-pointer
-                  ${path == menu.path && "bg-primary text-white"}
-                  `}
-              >
-                <menu.icon />
-                <h2 key={menu.id}>{menu.name}</h2>
-              </div>
-            </>
-          ))}
-        </div>
+    <div className="h-screen p-5 shadow-sm border">
+      <div className="flex items-center border">
+        <Image src="/logo.svg" alt="logo" width={200} height={100} priority />
       </div>
-    </>
+
+      <nav className="mt-12">
+        {menuItems.map((menu) => (
+          <div
+            key={menu.id}
+            className={`
+              flex items-center gap-2 mb-2 p-3 
+              hover:bg-primary hover:text-white 
+              rounded-lg cursor-pointer
+              transition-colors duration-200
+              ${path === menu.path ? "bg-primary text-white" : ""}
+            `}
+          >
+            <menu.icon className="h-5 w-5" />
+            <h2>{menu.name}</h2>
+          </div>
+        ))}
+      </nav>
+    </div>
   );
 };
 
