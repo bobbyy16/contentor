@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Loader2Icon } from "lucide-react";
 
 interface PROPS {
   selectedTemplate?: TEMPLATE | undefined;
   userFormInput?: any;
+  loading: boolean;
 }
 
-const FormSection = ({ selectedTemplate, userFormInput }: PROPS) => {
+const FormSection = ({ selectedTemplate, userFormInput, loading }: PROPS) => {
   const [formData, setFormData] = useState<any>();
 
   const onSubmit = (e: any) => {
@@ -55,9 +58,10 @@ const FormSection = ({ selectedTemplate, userFormInput }: PROPS) => {
               ) : null}
             </div>
           ))}
-          <button type="submit" className="w-full py-4 bg-primary text-white">
+          <Button type="submit" className="w-full py-4" disabled={loading}>
+            {loading && <Loader2Icon className="animate-spin" />}
             Generate content
-          </button>
+          </Button>
         </form>
       </div>
     </>
