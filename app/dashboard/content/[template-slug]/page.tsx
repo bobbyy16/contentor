@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
-
 "use client";
 
 import React, { useState } from "react";
@@ -22,6 +20,12 @@ export interface PROPS {
   };
 }
 
+interface FormDataType {
+  name: string;
+  email: string;
+  message: string;
+}
+
 const CreateNewContent = (props: PROPS) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [aiOutput, setAiOutput] = useState<string>("");
@@ -31,7 +35,7 @@ const CreateNewContent = (props: PROPS) => {
     (item) => item.slug === props.params["template-slug"]
   );
 
-  const generateAIContent = async (formData: Record<string, any>) => {
+  const generateAIContent = async (formData: FormDataType) => {
     setLoading(true);
     const selectedPrompt = selectedTemplate?.aiPrompt;
 
