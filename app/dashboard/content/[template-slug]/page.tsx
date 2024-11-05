@@ -14,6 +14,11 @@ import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
 
+// Define a type for the form data
+interface FormData {
+  [key: string]: string; // Adjust this based on the expected structure of your form data
+}
+
 interface PROPS {
   params: {
     "template-slug": string;
@@ -22,14 +27,14 @@ interface PROPS {
 
 function CreateNewContent(props: PROPS) {
   const selectedTemplate: TEMPLATE | undefined = Template?.find(
-    (items) => items.slug === props.params["template-slug"]
+    (item) => item.slug === props.params["template-slug"]
   );
 
   const [loading, setLoading] = useState(false);
   const [aiOutput, setAiOutput] = useState<string>("");
   const { user } = useUser();
 
-  const GenerateAIContent = async (formData: any) => {
+  const GenerateAIContent = async (formData: FormData) => {
     setLoading(true);
 
     try {
@@ -50,7 +55,7 @@ function CreateNewContent(props: PROPS) {
     }
   };
 
-  const SaveInDb = async (formData: any, slug: any, aiRes: string) => {
+  const SaveInDb = async (formData: FormData, slug: string, aiRes: string) => {
     try {
       const result = await db.insert(AIOutput).values({
         formData: formData,
@@ -77,7 +82,7 @@ function CreateNewContent(props: PROPS) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
         <FormSection
           selectedTemplate={selectedTemplate}
-          userFormInput={(v: any) => GenerateAIContent(v)}
+          userFormInput={(v: FormData) => GenerateAIContent(v)}
           loading={loading}
         />
         <div className="col-span-2">

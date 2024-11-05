@@ -2,13 +2,6 @@ import React from "react";
 import { ArrowRight, Check, Github, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 const HomePage = () => {
   return (
@@ -124,7 +117,7 @@ const HomePage = () => {
             {/* Blog Content */}
             <div className="border-2 hover:border-primary/50 transition p-6">
               <div className="text-center mb-4">
-                <img
+                <Image
                   src="https://cdn-icons-png.flaticon.com/128/9836/9836554.png"
                   alt="Blog Content Icon"
                   className="h-8 w-8 text-primary mb-4"
@@ -177,7 +170,7 @@ const HomePage = () => {
             {/* Text Improver */}
             <div className="border-2 hover:border-primary/50 transition p-6">
               <div className="text-center mb-4">
-                <img
+                <Image
                   src="https://cdn-icons-png.flaticon.com/128/17653/17653356.png"
                   alt="Text Improver Icon"
                   className="h-8 w-8 text-primary mb-4"
@@ -212,7 +205,7 @@ const HomePage = () => {
             {/* Add Emojis to Text */}
             <div className="border-2 hover:border-primary/50 transition p-6">
               <div className="text-center mb-4">
-                <img
+                <Image
                   src="https://cdn-icons-png.flaticon.com/128/1023/1023656.png"
                   alt="Add Emojis Icon"
                   className="h-8 w-8 text-primary mb-4"
