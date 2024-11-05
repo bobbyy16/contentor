@@ -4,103 +4,88 @@ import React, { useState } from "react";
 import FormSection from "./_components/FormSection";
 import OutputSection from "./_components/OutputSection";
 import { TEMPLATE } from "../../_components/TemplateListSection";
-import Templates from "@/app/(data)/Templates";
+import Template from "@/app/(data)/Templates";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { chatSession } from "@/utils/AI_Model";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
-import dayjs from "dayjs";
+import moment from "moment";
 
-export interface PROPS {
+interface PROPS {
   params: {
     "template-slug": string;
   };
 }
 
-interface FormDataType {
-  name: string;
-  email: string;
-  message: string;
-  // Add other fields as needed
-}
-
-const CreateNewContent = (props: PROPS) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [aiOutput, setAiOutput] = useState<string>("");
-
-  const { user } = useUser();
-  const selectedTemplate: TEMPLATE | undefined = Templates?.find(
-    (item) => item.slug === props.params["template-slug"]
+function CreateNewContent(props: PROPS) {
+  const selectedTemplate: TEMPLATE | undefined = Template?.find(
+    (items) => items.slug === props.params["template-slug"]
   );
 
-  const generateAIContent = async (formData: FormDataType) => {
+  const [loading, setLoading] = useState(false);
+  const [aiOutput, setAiOutput] = useState<string>("");
+  const { user } = useUser();
+
+  const GenerateAIContent = async (formData: any) => {
     setLoading(true);
-    const selectedPrompt = selectedTemplate?.aiPrompt;
 
-    const finalAiPrompt = JSON.stringify(formData) + ", " + selectedPrompt;
-    const result = await chatSession.sendMessage(finalAiPrompt);
-    const aiResponse = await result?.response.text();
-    setAiOutput(aiResponse || "");
-    await saveToDB(
-      JSON.stringify(formData),
-      selectedTemplate?.slug,
-      aiResponse
-    );
-    setLoading(false);
-  };
+    try {
+      const SelectedPrompt = selectedTemplate?.aiPrompt || "";
+      const FinalAIPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
 
-  const saveToDB = async (
-    formData: string,
-    slug: string | undefined,
-    aiResponse?: string
-  ) => {
-    if (!slug) {
-      throw new Error("Template slug is required.");
+      const result = await chatSession.sendMessage(FinalAIPrompt);
+
+      const aiResponse = await result.response.text();
+      console.log(aiResponse);
+      setAiOutput(aiResponse);
+
+      await SaveInDb(formData, selectedTemplate?.slug, aiResponse);
+    } catch (error) {
+      console.error("Error generating AI content:", error);
+    } finally {
+      setLoading(false);
     }
-
-    await db.insert(AIOutput).values({
-      formData,
-      templateSlug: slug,
-      aiResponse: aiResponse || null,
-      createdBy: user?.primaryEmailAddress?.emailAddress || "",
-      createdAt: dayjs().format("DD/MM/YYYY"),
-    });
   };
 
-  const handleUserFormInput = (data: { [key: string]: string }) => {
-    const formData: FormDataType = {
-      name: data.name,
-      email: data.email,
-      message: data.message,
-    };
-    generateAIContent(formData);
+  const SaveInDb = async (formData: any, slug: any, aiRes: string) => {
+    try {
+      const result = await db.insert(AIOutput).values({
+        formData: formData,
+        templateSlug: slug,
+        aiResponse: aiRes,
+        createdBy: user?.primaryEmailAddress?.emailAddress || "Unknown",
+        createdAt: moment().format("DD/MM/YYYY"),
+      });
+
+      console.log(result);
+    } catch (error) {
+      console.error("Error saving to DB:", error);
+    }
   };
 
   return (
-    <>
-      <div className="p-10">
-        <Link href={"/dashboard"}>
-          <Button>
-            <ArrowLeft /> Back
-          </Button>
-        </Link>
+    <div className="p-10">
+      <Link href="/dashboard">
+        <Button className="flex items-center gap-2 py-5">
+          <ArrowLeft /> Back
+        </Button>
+      </Link>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
-          <FormSection
-            selectedTemplate={selectedTemplate}
-            userFormInput={handleUserFormInput}
-            loading={loading}
-          />
-          <div className="col-span-2">
-            <OutputSection aiOutput={aiOutput} />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
+        <FormSection
+          selectedTemplate={selectedTemplate}
+          userFormInput={(v: any) => GenerateAIContent(v)}
+          loading={loading}
+        />
+        <div className="col-span-2">
+          <OutputSection aiOutput={aiOutput} />
         </div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default CreateNewContent;
