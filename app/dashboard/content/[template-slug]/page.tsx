@@ -24,6 +24,7 @@ interface FormDataType {
   name: string;
   email: string;
   message: string;
+  // Add other fields as needed
 }
 
 const CreateNewContent = (props: PROPS) => {
@@ -46,7 +47,7 @@ const CreateNewContent = (props: PROPS) => {
     await saveToDB(
       JSON.stringify(formData),
       selectedTemplate?.slug,
-      aiResponse || ""
+      aiResponse
     );
     setLoading(false);
   };
@@ -54,7 +55,7 @@ const CreateNewContent = (props: PROPS) => {
   const saveToDB = async (
     formData: string,
     slug: string | undefined,
-    aiResponse: string
+    aiResponse?: string
   ) => {
     await db.insert(AIOutput).values({
       formData,
@@ -62,7 +63,6 @@ const CreateNewContent = (props: PROPS) => {
       aiResponse,
       createdBy: user?.primaryEmailAddress?.emailAddress || "",
       createdAt: dayjs().format("DD/MM/YYYY"),
-      // ... other fields
     });
   };
 
