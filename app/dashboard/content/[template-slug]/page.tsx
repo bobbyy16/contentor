@@ -57,13 +57,26 @@ const CreateNewContent = (props: PROPS) => {
     slug: string | undefined,
     aiResponse?: string
   ) => {
+    if (!slug) {
+      throw new Error("Template slug is required.");
+    }
+
     await db.insert(AIOutput).values({
       formData,
       templateSlug: slug,
-      aiResponse,
+      aiResponse: aiResponse || null,
       createdBy: user?.primaryEmailAddress?.emailAddress || "",
       createdAt: dayjs().format("DD/MM/YYYY"),
     });
+  };
+
+  const handleUserFormInput = (data: { [key: string]: string }) => {
+    const formData: FormDataType = {
+      name: data.name,
+      email: data.email,
+      message: data.message,
+    };
+    generateAIContent(formData);
   };
 
   return (
@@ -78,7 +91,7 @@ const CreateNewContent = (props: PROPS) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
           <FormSection
             selectedTemplate={selectedTemplate}
-            userFormInput={(v: FormDataType) => generateAIContent(v)}
+            userFormInput={handleUserFormInput}
             loading={loading}
           />
           <div className="col-span-2">
