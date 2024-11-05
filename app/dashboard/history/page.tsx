@@ -31,7 +31,7 @@ async function History() {
   const HistoryList: HISTORY[] = await db
     .select()
     .from(AIOutput)
-    .where(eq(AIOutput.createdBy, user.primaryEmailAddress.emailAddress))
+    .where(eq(AIOutput.createdBy, user?.primaryEmailAddress.emailAddress))
     .orderBy(desc(AIOutput.createdAt))
     .then((results) =>
       results.map((item) => ({
