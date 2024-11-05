@@ -1,7 +1,11 @@
 import { Search } from "lucide-react";
 import React from "react";
 
-const SearchSection = ({ onSearchInput }: any) => {
+interface PROPS {
+  onSearchInput: (value: string) => void;
+}
+
+const SearchSection = ({ onSearchInput }: PROPS) => {
   return (
     <div
       className="p-10 bg-gradient-to-br from-black via-gray-800 to-gray-900 

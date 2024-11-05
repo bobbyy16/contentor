@@ -20,7 +20,11 @@ export interface FORM {
   required?: boolean;
 }
 
-const TemplateListSection = ({ userSearchInput }: any) => {
+interface PROPS {
+  userSearchInput?: string;
+}
+
+const TemplateListSection = ({ userSearchInput }: PROPS) => {
   const [templateList, setTemplateList] = useState(Templates);
 
   useEffect(() => {

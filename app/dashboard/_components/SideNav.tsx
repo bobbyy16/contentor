@@ -2,14 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
-import { History, Home, Settings, WalletCards } from "lucide-react";
+import { History, LayoutDashboard } from "lucide-react";
 import { usePathname } from "next/navigation";
-import UsageTrack from "./UsageTrack";
 import Link from "next/link";
 
 const SideNav = () => {
   const menuItems = [
-    { id: 1, name: "Dashboard", icon: Home, path: "/dashboard" },
+    { id: 1, name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
     { id: 2, name: "History", icon: History, path: "/dashboard/history" },
   ];
 

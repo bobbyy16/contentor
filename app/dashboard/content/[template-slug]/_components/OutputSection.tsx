@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
+import { Editor, EditorProps } from "@toast-ui/react-editor";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -10,7 +10,7 @@ interface PROPS {
 }
 
 const OutputSection = ({ aiOutput }: PROPS) => {
-  const editorRef: any = useRef();
+  const editorRef = useRef<Editor | null>(null);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -21,18 +21,19 @@ const OutputSection = ({ aiOutput }: PROPS) => {
   }, [aiOutput]);
 
   const handleCopy = async () => {
-    const editorInstance = editorRef.current.getInstance();
-    const content = editorInstance.getMarkdown();
+    if (editorRef.current) {
+      const content = editorRef.current.getInstance().getMarkdown();
 
-    try {
-      await navigator.clipboard.writeText(content);
-      setCopied(true);
+      try {
+        await navigator.clipboard.writeText(content);
+        setCopied(true);
 
-      setTimeout(() => {
-        setCopied(false);
-      }, 2000);
-    } catch (err) {
-      console.error("Failed to copy text:", err);
+        setTimeout(() => {
+          setCopied(false);
+        }, 2000);
+      } catch (err) {
+        console.error("Failed to copy text:", err);
+      }
     }
   };
 

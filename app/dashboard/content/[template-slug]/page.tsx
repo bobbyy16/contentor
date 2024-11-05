@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import FormSection from "./_components/FormSection";
 import OutputSection from "./_components/OutputSection";
 import { TEMPLATE } from "../../_components/TemplateListSection";
@@ -12,7 +12,7 @@ import { chatSession } from "@/utils/AI_Model";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
-import dayjs from "dayjs"; // Changed import statement
+import dayjs from "dayjs";
 
 export interface PROPS {
   params: {
@@ -21,36 +21,42 @@ export interface PROPS {
 }
 
 const CreateNewContent = (props: PROPS) => {
-  const [loading, setLoading] = useState<any>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [aiOutput, setAiOutput] = useState<string>("");
 
   const { user } = useUser();
   const selectedTemplate: TEMPLATE | undefined = Templates?.find(
-    (item) => item.slug == props.params["template-slug"]
+    (item) => item.slug === props.params["template-slug"]
   );
 
-  const generateAIContent = async (formData: any) => {
+  const generateAIContent = async (formData: Record<string, any>) => {
     setLoading(true);
     const selectedPrompt = selectedTemplate?.aiPrompt;
 
     const finalAiPrompt = JSON.stringify(formData) + ", " + selectedPrompt;
     const result = await chatSession.sendMessage(finalAiPrompt);
-    setAiOutput(result?.response.text());
+    const aiResponse = await result?.response.text();
+    setAiOutput(aiResponse || "");
     await saveToDB(
       JSON.stringify(formData),
       selectedTemplate?.slug,
-      result?.response.text()
+      aiResponse || ""
     );
     setLoading(false);
   };
 
-  const saveToDB = async (formData: any, slug: any, aiResponse: string) => {
+  const saveToDB = async (
+    formData: string,
+    slug: string | undefined,
+    aiResponse: string
+  ) => {
     await db.insert(AIOutput).values({
-      formData: formData,
+      formData,
       templateSlug: slug,
-      aiResponse: aiResponse,
-      createdBy: user?.primaryEmailAddress?.emailAddress,
-      createdAt: dayjs().format("DD/MM/YYYY"), // Fixed dayjs usage
+      aiResponse,
+      createdBy: user?.primaryEmailAddress?.emailAddress || "",
+      createdAt: dayjs().format("DD/MM/YYYY"),
+      e,
     });
   };
 
@@ -66,7 +72,7 @@ const CreateNewContent = (props: PROPS) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
           <FormSection
             selectedTemplate={selectedTemplate}
-            userFormInput={(v: any) => generateAIContent(v)}
+            userFormInput={(v: Record<string, any>) => generateAIContent(v)}
             loading={loading}
           />
           <div className="col-span-2">

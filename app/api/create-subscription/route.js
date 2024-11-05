@@ -1,6 +1,4 @@
-import Razorpay from "razorpay";
-
-export async function POST(req, res) {
+export async function POST(Response) {
   let instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_kEY_ID,
     key_secret: process.env.RAZORPAY_API_KEY_SECRET,
