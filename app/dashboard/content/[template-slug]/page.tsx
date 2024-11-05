@@ -62,7 +62,7 @@ const CreateNewContent = (props: PROPS) => {
       aiResponse,
       createdBy: user?.primaryEmailAddress?.emailAddress || "",
       createdAt: dayjs().format("DD/MM/YYYY"),
-      e,
+      // ... other fields
     });
   };
 
@@ -78,7 +78,7 @@ const CreateNewContent = (props: PROPS) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
           <FormSection
             selectedTemplate={selectedTemplate}
-            userFormInput={(v: Record<string, any>) => generateAIContent(v)}
+            userFormInput={(v: FormDataType) => generateAIContent(v)}
             loading={loading}
           />
           <div className="col-span-2">
