@@ -121,6 +121,8 @@ const HomePage = () => {
                   src="https://cdn-icons-png.flaticon.com/128/9836/9836554.png"
                   alt="Blog Content Icon"
                   className="h-8 w-8 text-primary mb-4"
+                  width={100}
+                  height={100}
                 />
                 <h3 className="text-xl font-bold">Blog Content</h3>
                 <p className="text-gray-600">
@@ -174,6 +176,8 @@ const HomePage = () => {
                   src="https://cdn-icons-png.flaticon.com/128/17653/17653356.png"
                   alt="Text Improver Icon"
                   className="h-8 w-8 text-primary mb-4"
+                  width={100}
+                  height={100}
                 />
                 <h3 className="text-xl font-bold">Text Improver</h3>
                 <p className="text-gray-600">
@@ -209,6 +213,8 @@ const HomePage = () => {
                   src="https://cdn-icons-png.flaticon.com/128/1023/1023656.png"
                   alt="Add Emojis Icon"
                   className="h-8 w-8 text-primary mb-4"
+                  width={100}
+                  height={100}
                 />
                 <h3 className="text-xl font-bold">Add Emojis to Text</h3>
                 <p className="text-gray-600">
