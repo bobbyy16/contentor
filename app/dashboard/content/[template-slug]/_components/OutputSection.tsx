@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor, EditorProps } from "@toast-ui/react-editor";
+import { Editor } from "@toast-ui/react-editor";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

@@ -31,7 +31,7 @@ const FormSection = ({ selectedTemplate, userFormInput, loading }: PROPS) => {
   return (
     <>
       <div className="p-5 shadow-md border rounded-lg bg-white">
-        {/* @ts-expect-error */}
+        {/* @ts-ignore */}
         <Image src={selectedTemplate?.icon} alt="icon" width={70} height={70} />
         <br />
         <h1 className="font-bold text-2xl mb-2 text-primary">
