@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+"use client";
+import React, { useEffect, useRef, useState } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 interface PROPS {
   aiOutput: string;
@@ -14,8 +14,10 @@ const OutputSection = ({ aiOutput }: PROPS) => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const editorInstance = editorRef.current.getInstance();
-    editorInstance.setMarkdown(aiOutput);
+    if (editorRef.current) {
+      const editorInstance = editorRef.current.getInstance();
+      editorInstance.setMarkdown(aiOutput);
+    }
   }, [aiOutput]);
 
   const handleCopy = async () => {
@@ -26,7 +28,6 @@ const OutputSection = ({ aiOutput }: PROPS) => {
       await navigator.clipboard.writeText(content);
       setCopied(true);
 
-      // Reset the copied state after 2 seconds
       setTimeout(() => {
         setCopied(false);
       }, 2000);
@@ -63,9 +64,6 @@ const OutputSection = ({ aiOutput }: PROPS) => {
         initialEditType="wysiwyg"
         height="600px"
         useCommandShortcut={true}
-        // onChange={() =>
-        //   console.log(editorRef.current.getInstance().getMarkdown())
-        // }
       />
     </div>
   );

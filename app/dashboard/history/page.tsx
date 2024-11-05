@@ -8,7 +8,7 @@ import React from "react";
 import CopyButton from "./_components/CopyButton";
 
 export interface HISTORY {
-  forEach(arg0: (element: { aiResponse: string | any[] }) => void): unknown;
+  // forEach(arg0: (element: { aiResponse: string | any[] }) => void): unknown;
   id: number;
   formData: string;
   aiResponse: string;
@@ -16,11 +16,6 @@ export interface HISTORY {
   createdBy: string;
   createdAt: string;
 }
-
-// export const LOCAL_TEMPLATE = [
-//   { slug: "template1", name: "Template 1", icon: "/icon1.png" },
-//   { slug: "template2", name: "Template 2", icon: "/icon2.png" },
-// ];
 
 async function History() {
   const user = await currentUser();
@@ -59,46 +54,77 @@ async function History() {
 
   return (
     <div className="m-5 p-5 border rounded-lg bg-white">
-      <h2 className="font-bold text-3xl">History</h2>
-      <p className="text-gray-500">
-        Search your previously generated AI content history
-      </p>
-      <div className="grid grid-cols-7 font-bold bg-secondary mt-5 py-3">
-        <h2 className="col-span-2">TEMPLATE</h2>
-        <h2 className="col-span-2">AI RESPONSE</h2>
-        <h2>DATE</h2>
-        <h2>WORDS</h2>
-        <h2>COPY</h2>
+      <div className="mb-6">
+        <h2 className="font-bold text-3xl">History</h2>
+        <p className="text-gray-500">
+          Search your previously generated AI content history
+        </p>
       </div>
 
-      {HistoryList.length > 0 ? (
-        HistoryList.map((item: HISTORY) => {
-          const { name, icon } = GetTemplateData(item.templateSlug);
-          return (
-            <div
-              key={item.id}
-              className="grid grid-cols-7 my-5 py-3 px-3 border-b"
-            >
-              <h2 className="col-span-2 flex gap-2 items-center">
-                <Image src={icon} width={25} height={25} alt={name} />
-                {name}
-              </h2>
-              <h2 className="col-span-2 line-clamp-3">{item.aiResponse}</h2>
-              <h2>
-                {item.createdAt
-                  ? new Date(item.createdAt).toLocaleDateString()
-                  : "Unknown date"}
-              </h2>
-              <h2>{(item.aiResponse || "").split(" ").length}</h2>
-              <h2>
-                <CopyButton textToCopy={item.aiResponse || ""} />
-              </h2>
-            </div>
-          );
-        })
-      ) : (
-        <p className="text-center mt-5">No history found for your account.</p>
-      )}
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr className="bg-gray-50">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Template
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                AI Response
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Date
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Copy
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {HistoryList.length > 0 ? (
+              HistoryList.map((item: HISTORY) => {
+                const { name, icon } = GetTemplateData(item.templateSlug);
+                return (
+                  <tr key={item.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center gap-2">
+                        <Image
+                          src={icon}
+                          width={25}
+                          height={25}
+                          alt={name}
+                          className="flex-shrink-0"
+                        />
+                        <span className="text-sm font-medium text-gray-900">
+                          {name}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-900 line-clamp-3">
+                        {item.aiResponse}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {item.createdAt
+                        ? new Date(item.createdAt).toLocaleDateString()
+                        : "Unknown date"}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <CopyButton textToCopy={item.aiResponse || ""} />
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan={4} className="px-6 py-4 text-center text-gray-500">
+                  No history found for your account.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

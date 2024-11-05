@@ -22,7 +22,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy }) => {
       onClick={handleCopy}
       className={`${
         isCopied ? "bg-gray-800 text-white" : "bg-primary text-white"
-      } transform transition-transform duration-200 hover:scale-105`}
+      } transform transition-transform duration-200 hover:scale-105 `}
     >
       {isCopied ? "Copied!" : "Copy"}
     </Button>

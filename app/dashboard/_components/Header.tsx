@@ -16,11 +16,11 @@ const Header = () => {
           />
         </div> */}
         <div className="flex gap-5 items-center">
-          <Link href={"/dashboard/billing"}>
+          {/* <Link href={"/dashboard/billing"}>
             <h2 className="bg-primary p-1 rounded-full text-xs text-white px-2 cursor-pointer">
               Join membership just for $1.99/Month
             </h2>
-          </Link>
+          </Link> */}
           <Link href={"https://github.com/bobbyy16/contentor"}>
             <Github />
           </Link>

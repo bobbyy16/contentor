@@ -9,9 +9,8 @@ import Link from "next/link";
 
 const SideNav = () => {
   const menuItems = [
-    { id: 1, name: "Home", icon: Home, path: "/dashboard" },
+    { id: 1, name: "Dashboard", icon: Home, path: "/dashboard" },
     { id: 2, name: "History", icon: History, path: "/dashboard/history" },
-    { id: 3, name: "Billing", icon: WalletCards, path: "/dashboard/billing" },
   ];
 
   const path = usePathname();
@@ -38,9 +37,6 @@ const SideNav = () => {
           </Link>
         ))}
       </nav>
-      <div className="absolute bottom-10 left-0 w-full">
-        <UsageTrack />
-      </div>
     </div>
   );
 };
