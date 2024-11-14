@@ -64,7 +64,7 @@ function CreateNewContent(props: PROPS) {
   const SaveInDb = async (formData: FormData, slug: string, aiRes: string) => {
     try {
       const result = await db.insert(AIOutput).values({
-        formData: formData,
+        formData: JSON.stringify(formData),
         templateSlug: slug,
         aiResponse: aiRes,
         createdBy: user?.primaryEmailAddress?.emailAddress || "Unknown",
