@@ -38,6 +38,12 @@ function CreateNewContent(props: PROPS) {
     setLoading(true);
 
     try {
+      if (!selectedTemplate?.slug) {
+        console.error("Template slug is missing.");
+        setLoading(false);
+        return;
+      }
+
       const SelectedPrompt = selectedTemplate?.aiPrompt || "";
       const FinalAIPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
 
@@ -47,7 +53,7 @@ function CreateNewContent(props: PROPS) {
       console.log(aiResponse);
       setAiOutput(aiResponse);
 
-      await SaveInDb(formData, selectedTemplate?.slug, aiResponse);
+      await SaveInDb(formData, selectedTemplate.slug, aiResponse);
     } catch (error) {
       console.error("Error generating AI content:", error);
     } finally {
