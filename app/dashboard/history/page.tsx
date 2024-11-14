@@ -8,7 +8,6 @@ import React from "react";
 import CopyButton from "./_components/CopyButton";
 
 export interface HISTORY {
-  // forEach(arg0: (element: { aiResponse: string | any[] }) => void): unknown;
   id: number;
   formData: string;
   aiResponse: string;
@@ -40,7 +39,7 @@ async function History() {
         aiResponse: item.aiResponse || "",
         templateSlug: item.templateSlug,
         createdBy: item.createdBy,
-        createdAt: item.createdAt || new Date().toISOString(),
+        createdAt: item.createdAt || "",
       }))
     );
 
@@ -51,7 +50,6 @@ async function History() {
       icon: template?.icon || "/default-icon.png",
     };
   };
-
   return (
     <div className="m-5 p-5 border rounded-lg bg-white">
       <div className="mb-6">
@@ -105,9 +103,7 @@ async function History() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.createdAt
-                        ? new Date(item.createdAt).toLocaleDateString()
-                        : "Unknown date"}
+                      {item.createdAt ? item.createdAt : "Unknown date"}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <CopyButton textToCopy={item.aiResponse || ""} />

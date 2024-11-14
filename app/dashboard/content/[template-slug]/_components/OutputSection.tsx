@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { Button } from "@/components/ui/button";
@@ -10,16 +10,19 @@ interface Props {
 
 function OutputSection({ aiOutput }: Props) {
   const editorRef = useRef<Editor>(null);
+  const [error, setError] = useState("");
 
-  // Update editor's content when aiOutput changes
   useEffect(() => {
     const editorInstance = editorRef.current?.getInstance();
     if (editorInstance) {
       editorInstance.setMarkdown(aiOutput);
+    } else {
+      setError(
+        "There was an issue rendering the AI output. Please try again later."
+      );
     }
   }, [aiOutput]);
 
-  // Function to handle copying the content to clipboard
   const handleCopy = () => {
     const editorInstance = editorRef.current?.getInstance();
     if (editorInstance) {
@@ -30,7 +33,7 @@ function OutputSection({ aiOutput }: Props) {
           alert("Content copied to clipboard!");
         })
         .catch((err) => {
-          console.error("Failed to copy text: ", err);
+          console.error("Failed to copy text:", err);
         });
     }
   };
@@ -44,16 +47,20 @@ function OutputSection({ aiOutput }: Props) {
         </Button>
       </div>
 
-      <Editor
-        ref={editorRef}
-        initialValue="Your result will be displayed here"
-        initialEditType="wysiwyg"
-        height="600px"
-        useCommandShortcut={true}
-        onChange={() =>
-          console.log(editorRef.current?.getInstance().getMarkdown())
-        }
-      />
+      {error ? (
+        <div className="p-5 text-red-500">{error}</div>
+      ) : (
+        <Editor
+          ref={editorRef}
+          initialValue="Your result will be displayed here"
+          initialEditType="wysiwyg"
+          height="600px"
+          useCommandShortcut={true}
+          onChange={() =>
+            console.log(editorRef.current?.getInstance().getMarkdown())
+          }
+        />
+      )}
     </div>
   );
 }
