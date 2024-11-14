@@ -67,7 +67,8 @@ const HomePage = () => {
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12">
             Craft perfect content in seconds with our advanced AI writing
-            assistant. From blog posts to marketing copy, we've got you covered.
+            assistant. From blog posts to marketing copy, we&apos;ve got you
+            covered.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link
@@ -274,23 +275,24 @@ const HomePage = () => {
             {/* Testimonial 1 */}
             <div className="border rounded-lg p-6 shadow-md">
               <p className="text-gray-600 italic mb-4">
-                "Contentor has revolutionized my writing process. I can create
-                blog posts in minutes!"
+                &quot;Contentor has revolutionized my writing process. I can
+                create blog posts in minutes!&quot;
               </p>
               <p className="font-bold">- John Doe</p>
             </div>
             {/* Testimonial 2 */}
             <div className="border rounded-lg p-6 shadow-md">
               <p className="text-gray-600 italic mb-4">
-                "The AI assistance is incredible! It has saved me so much time."
+                &quot;The AI assistance is incredible! It has saved me so much
+                time.&quot;
               </p>
               <p className="font-bold">- Jane Smith</p>
             </div>
             {/* Testimonial 3 */}
             <div className="border rounded-lg p-6 shadow-md">
               <p className="text-gray-600 italic mb-4">
-                "I love the easy interface and the smart suggestions. Highly
-                recommend!"
+                &quot;I love the easy interface and the smart suggestions.
+                Highly recommend!&quot;
               </p>
               <p className="font-bold">- Mark Wilson</p>
             </div>
