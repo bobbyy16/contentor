@@ -15,7 +15,11 @@ function OutputSection({ aiOutput }: Props) {
   useEffect(() => {
     const editorInstance = editorRef.current?.getInstance();
     if (editorInstance) {
-      editorInstance.setMarkdown(aiOutput);
+      if (aiOutput) {
+        editorInstance.setMarkdown(aiOutput);
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
     } else {
       setError(
         "There was an issue rendering the AI output. Please try again later."
