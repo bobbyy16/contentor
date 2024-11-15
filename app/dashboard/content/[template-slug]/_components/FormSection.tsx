@@ -1,4 +1,5 @@
 "use client";
+
 import { TEMPLATE } from "@/app/dashboard/_components/TemplateListSection";
 import React, { useState } from "react";
 import Image from "next/image";
