@@ -79,7 +79,7 @@ const HomePage = () => {
               <ArrowRight className="h-5 w-5 ml-2" />
             </Link>
             <Link
-              href="#demo"
+              href="https://www.loom.com/share/b6c5dee2109541e3b03f86b1af4b5ff8?sid=5d6427b1-25cb-4ef0-8f5f-bce0d8733bdd"
               className="flex items-center justify-center bg-gray-100 text-gray-900 font-medium rounded-lg px-8 py-4 hover:bg-gray-200 transition text-lg"
             >
               Watch Demo
