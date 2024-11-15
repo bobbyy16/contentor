@@ -14,9 +14,8 @@ import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
 
-// Define a type for the form data
 interface FormData {
-  [key: string]: string; // Adjust this based on the expected structure of your form data
+  [key: string]: string;
 }
 
 interface PROPS {
@@ -32,14 +31,17 @@ function CreateNewContent(props: PROPS) {
 
   const [loading, setLoading] = useState(false);
   const [aiOutput, setAiOutput] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const { user } = useUser();
 
   const GenerateAIContent = async (formData: FormData) => {
     setLoading(true);
+    setError(null);
 
     try {
       if (!selectedTemplate?.slug) {
         console.error("Template slug is missing.");
+        setError("Template slug is missing.");
         setLoading(false);
         return;
       }
@@ -48,14 +50,15 @@ function CreateNewContent(props: PROPS) {
       const FinalAIPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
 
       const result = await chatSession.sendMessage(FinalAIPrompt);
-
       const aiResponse = await result.response.text();
-      console.log(aiResponse);
-      setAiOutput(aiResponse);
 
+      setAiOutput(aiResponse);
       await SaveInDb(formData, selectedTemplate.slug, aiResponse);
     } catch (error) {
       console.error("Error generating AI content:", error);
+      setError(
+        "There was an issue generating content. Please try again later."
+      );
     } finally {
       setLoading(false);
     }
@@ -74,25 +77,31 @@ function CreateNewContent(props: PROPS) {
       console.log(result);
     } catch (error) {
       console.error("Error saving to DB:", error);
+      setError("Error saving to the database. Please try again later.");
     }
   };
 
   return (
-    <div className="p-10">
-      <Link href="/dashboard">
-        <Button className="flex items-center gap-2 py-5">
-          <ArrowLeft /> Back
-        </Button>
-      </Link>
+    <div className="p-4 md:p-10 max-w-7xl mx-auto">
+      <div className="mb-6">
+        <Link href="/dashboard">
+          <Button className="flex items-center gap-2 py-3 md:py-5 w-full md:w-auto justify-center md:justify-start">
+            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" /> Back to Dashboard
+          </Button>
+        </Link>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
-        <FormSection
-          selectedTemplate={selectedTemplate}
-          userFormInput={(v: FormData) => GenerateAIContent(v)}
-          loading={loading}
-        />
-        <div className="col-span-2">
-          <OutputSection aiOutput={aiOutput} />
+      <div className="space-y-6 md:space-y-0 md:grid md:grid-cols-3 md:gap-6">
+        <div className="w-full md:sticky md:top-4 md:h-fit">
+          <FormSection
+            selectedTemplate={selectedTemplate}
+            userFormInput={(v: FormData) => GenerateAIContent(v)}
+            loading={loading}
+          />
+        </div>
+
+        <div className="w-full md:col-span-2">
+          <OutputSection aiOutput={aiOutput} error={error} />
         </div>
       </div>
     </div>

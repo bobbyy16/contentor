@@ -20,16 +20,16 @@ const HomePage = () => {
                 className="mt-0"
               />
             </Link>
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="flex items-center space-x-8 md:space-x-4">
               <Link
                 href="#features"
-                className="text-gray-600 hover:text-gray-900"
+                className="text-gray-600 hover:text-gray-900 font-medium hidden sm:block"
               >
                 Features
               </Link>
               <Link
                 href="#testimonials"
-                className="text-gray-600 hover:text-gray-900"
+                className="text-gray-600 hover:text-gray-900 font-medium hidden sm:block"
               >
                 Testimonials
               </Link>
@@ -37,11 +37,11 @@ const HomePage = () => {
                 href="/dashboard"
                 className="bg-primary text-white font-medium rounded-lg px-4 py-2 hover:bg-primary/90 transition"
               >
-                Get Started
+                dashboard
               </Link>
               <Link
                 href="https://github.com/bobbyy16/contentor"
-                className="text-gray-600 hover:text-gray-900"
+                className="text-gray-600 hover:text-gray-900 font-medium"
               >
                 <Github className="h-5 w-5" />
               </Link>

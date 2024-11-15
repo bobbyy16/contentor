@@ -21,7 +21,7 @@ async function History() {
 
   if (!user?.primaryEmailAddress?.emailAddress) {
     return (
-      <div className="m-5 p-5 border rounded-lg bg-white">
+      <div className="m-2 sm:m-5 p-4 sm:p-5 border rounded-lg bg-white">
         <p className="text-center">Please sign in to view your history.</p>
       </div>
     );
@@ -50,16 +50,18 @@ async function History() {
       icon: template?.icon || "/default-icon.png",
     };
   };
+
   return (
-    <div className="m-5 p-5 border rounded-lg bg-white">
-      <div className="mb-6">
-        <h2 className="font-bold text-3xl">History</h2>
-        <p className="text-gray-500">
+    <div className="m-2 sm:m-5 p-4 sm:p-5 border rounded-lg bg-white">
+      <div className="mb-4 sm:mb-6">
+        <h2 className="font-bold text-2xl sm:text-3xl">History</h2>
+        <p className="text-gray-500 text-sm sm:text-base">
           Search your previously generated AI content history
         </p>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Desktop View */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr className="bg-gray-50">
@@ -120,6 +122,49 @@ async function History() {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile View */}
+      <div className="md:hidden space-y-4">
+        {HistoryList.length > 0 ? (
+          HistoryList.map((item: HISTORY) => {
+            const { name, icon } = GetTemplateData(item.templateSlug);
+            return (
+              <div
+                key={item.id}
+                className="border rounded-lg p-4 space-y-3 hover:bg-gray-50"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Image
+                      src={icon}
+                      width={20}
+                      height={20}
+                      alt={name}
+                      className="flex-shrink-0"
+                    />
+                    <span className="text-sm font-medium text-gray-900">
+                      {name}
+                    </span>
+                  </div>
+                  <CopyButton textToCopy={item.aiResponse || ""} />
+                </div>
+
+                <div className="text-sm text-gray-900 line-clamp-2">
+                  {item.aiResponse}
+                </div>
+
+                <div className="text-xs text-gray-500">
+                  {item.createdAt ? item.createdAt : "Unknown date"}
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div className="text-center text-gray-500 py-4">
+            No history found for your account.
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { Button } from "@/components/ui/button";
@@ -6,26 +6,18 @@ import { Copy } from "lucide-react";
 
 interface Props {
   aiOutput: string;
+  error: string | null;
 }
 
-function OutputSection({ aiOutput }: Props) {
+function OutputSection({ aiOutput, error }: Props) {
   const editorRef = useRef<Editor>(null);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     const editorInstance = editorRef.current?.getInstance();
     if (editorInstance) {
-      if (aiOutput) {
-        editorInstance.setMarkdown(aiOutput);
-      } else {
-        setError("Something went wrong. Please try again later.");
-      }
-    } else {
-      setError(
-        "There was an issue rendering the AI output. Please try again later."
-      );
+      editorInstance.setMarkdown(error ? `Error: ${error}` : aiOutput);
     }
-  }, [aiOutput]);
+  }, [aiOutput, error]);
 
   const handleCopy = () => {
     const editorInstance = editorRef.current?.getInstance();
@@ -44,27 +36,27 @@ function OutputSection({ aiOutput }: Props) {
 
   return (
     <div className="bg-white rounded-lg shadow-lg border">
-      <div className="flex justify-between items-center p-5">
-        <h2 className="text-black font-medium text-lg">Your Result</h2>
-        <Button className="flex gap-2" onClick={handleCopy}>
+      <div className="flex justify-between items-center p-3 sm:p-5">
+        <h2 className="text-black font-medium text-base sm:text-lg">
+          Your Result
+        </h2>
+        <Button
+          size="sm"
+          className="flex items-center gap-2"
+          onClick={handleCopy}
+        >
           <Copy className="w-4 h-4" /> Copy
         </Button>
       </div>
-
-      {error ? (
-        <div className="p-5 text-red-500">{error}</div>
-      ) : (
-        <Editor
-          ref={editorRef}
-          initialValue="Your result will be displayed here"
-          initialEditType="wysiwyg"
-          height="600px"
-          useCommandShortcut={true}
-          onChange={() =>
-            console.log(editorRef.current?.getInstance().getMarkdown())
-          }
-        />
-      )}
+      <Editor
+        ref={editorRef}
+        initialValue={
+          error ? `Error: ${error}` : "Your result will be displayed here"
+        }
+        initialEditType="wysiwyg"
+        height="calc(100vh - 200px)"
+        useCommandShortcut={true}
+      />
     </div>
   );
 }
