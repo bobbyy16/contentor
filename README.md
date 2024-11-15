@@ -2,6 +2,8 @@
 
 **Contentor** is a content-generating AI tool designed to streamline the creation of engaging and relevant content.
 
+![Alt text](https://github.com/bobbyy16/contentor/blob/main/public/homePage.png)
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
