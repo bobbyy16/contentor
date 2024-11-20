@@ -59,7 +59,6 @@ export default [
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
     icon: "https://cdn-icons-png.flaticon.com/128/74/74559.png",
     category: "blog",
-
     slug: "instagram-hash-tag-generator",
     aiPrompt:
       "Generate 15 Instagram hash tag depends on a given keywords and give output in  in rich text editor format",
@@ -73,17 +72,16 @@ export default [
     ],
   },
   {
-    name: "Grammer Check",
-    desc: "AI Model to Correct your english grammer by providing the text",
+    name: "Grammar Check",
+    desc: "AI Model to Correct your english grammar by providing the text",
     icon: "https://cdn-icons-png.flaticon.com/128/12596/12596743.png",
     category: "english",
-
-    slug: "english-grammer-checker",
+    slug: "english-grammar-checker",
     aiPrompt:
-      "Rewrite the inputText by correcting the grammer and give output in  in rich text editor format",
+      "Rewrite the inputText by correcting the grammar and give output in  in rich text editor format",
     form: [
       {
-        label: "Enter text to correct the grammer",
+        label: "Enter text to correct the grammar",
         field: "input",
         name: "inputText",
         required: true,
@@ -95,7 +93,6 @@ export default [
     desc: "AI Model to generate programming code in any language",
     icon: "https://cdn-icons-png.flaticon.com/128/1336/1336494.png",
     category: "Coding",
-
     slug: "write-code",
     aiPrompt:
       "Depends on user codeDescription write a code and give output in  in rich text editor format in code block ",
@@ -103,7 +100,7 @@ export default [
       {
         label: "Enter description of code you want along with Programming Lang",
         field: "textarea",
-        name: "codeDesscripton",
+        name: "codeDescription",
         required: true,
       },
     ],
@@ -113,7 +110,6 @@ export default [
     desc: "AI Model to explain programming code in any language",
     icon: "https://cdn-icons-png.flaticon.com/128/10478/10478244.png",
     category: "Coding",
-
     slug: "explain-code",
     aiPrompt:
       "Depends on user codeDescription explain code line by line and give output in  in rich text editor format in code block ",
@@ -121,7 +117,7 @@ export default [
       {
         label: "Enter code which you want to understand",
         field: "textarea",
-        name: "codeDesscripton",
+        name: "codeDescription",
         required: true,
       },
     ],
@@ -131,7 +127,6 @@ export default [
     desc: "This tool analyzes your input, like error messages and code snippets, to pinpoint and fix bugs, offering detailed solutions and alternatives in a straightforward, user-friendly way.",
     icon: "https://cdn-icons-png.flaticon.com/128/921/921513.png",
     category: "code-bug-detector",
-
     slug: "code-bug-detector",
     aiPrompt:
       "Depends on user codeInput find bug in code and give solution and give output in  in rich text editor format in code block ",
@@ -140,6 +135,23 @@ export default [
         label: "Enter code which you want to test bug",
         field: "textarea",
         name: "codeInput",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Roadmap Generator",
+    desc: "Generate a step-by-step roadmap to learn or achieve goals in various fields like coding, writing, or design.",
+    icon: "https://cdn-icons-png.flaticon.com/128/7372/7372492.png",
+    category: "Learning",
+    slug: "roadmap-generator",
+    aiPrompt:
+      "Based on the user's inputTopic, generate a comprehensive roadmap to achieve mastery in the topic, add arrow marks as well, formatted for a rich text editor.",
+    form: [
+      {
+        label: "Enter the topic you want a roadmap for",
+        field: "input",
+        name: "inputTopic",
         required: true,
       },
     ],
